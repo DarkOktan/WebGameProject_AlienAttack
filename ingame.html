@@ -1,0 +1,46 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<head>
+    <title>Alien attack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <p style="display: inline-block;" id="usernameTxt">Username: Dimas</p>
+    <p style="display: inline-block; padding-left: 130px" id="timeTxt">Time</p>
+    <div id="ingame">
+        <div id="background"></div>
+        <div id="cannon"></div>
+        <div id="missile"></div>
+        <div id="alien"></div>
+    </div>
+    
+    <p id="output">Enter the X and Y position (0–300), then click fire.</p>
+    <!-- <input id="inputX" type="text" placeholder="X...">
+    <input id="inputY" type="text" placeholder="Y..."> -->
+
+<div style="display: inline-block;">
+
+    <p id="XPostxt">X Position</p>
+    <input type="range" min="1" max="300" value="50" class="slider" id="XRange">
+    
+    <p id="YPostxt">Y Position</p>
+    <input type="range" min="1" max="300" value="50" class="slider" id="YRange">
+</div>
+
+    <button id="fireButton">fire!</button>
+    <script src="Logic/game.js"></script>
+</body>
+
+</html>
+
+<!-- <div>
+    <p>X Position</p>
+    <input type="range" min="1" max="300" value="50" class="slider" id="XRange">
+</div>
+<div>
+    <p>Y Position</p>
+    <input type="range" min="1" max="300" value="50" class="slider" id="YRange">
+</div> -->
+

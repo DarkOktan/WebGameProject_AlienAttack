@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<head>
+    <title>Alien attack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form action="database/loginRegist.php">
+        <div id="login">
+            <p style="text-align: center; padding-top: 10%; color: white;">Insert the Username</p>
+            <input id = "usernameInput" type="text" placeholder="Username">
+            <input id = "passwordInput" type="password" placeholder="Password">
+            <br>
+            <!-- <p></p> -->
+            <button id = "loginButton" name="loginButton">Login</button>
+            <p style="margin-bottom: 0px; color: white;">Dont have Account? Register Now</p>
+            <hr style="width: 80%;">
+            <button id= "registerButton" name="registerButton">Register</button>
+            <p id = "inputOutput"></p>
+        </div>
+    </form>
+    
+    <script type="module" src="Logic/login.js"></script>
+</body>
+</html>
