@@ -84,6 +84,7 @@
 #fireButton {
     background-color: red;
     color: white;
+    width: 150px;
 }
 
 #win_gameOver{

@@ -4,24 +4,81 @@
 <head>
     <title>Alien attack</title>
     <link rel="stylesheet" href="style.css">
+    <!-- <script type="text/javascript" src="https://localhost/WebGameProject_AlienAttack/Logic/login.js"></script> -->
 </head>
 
 <body>
-    <form action="database/loginRegist.php">
-        <div id="login">
+    <div id="login">
+            <form method="post" action="database/loginRegist.php">
             <p style="text-align: center; padding-top: 10%; color: white;">Insert the Username</p>
-            <input id = "usernameInput" type="text" placeholder="Username">
-            <input id = "passwordInput" type="password" placeholder="Password">
+            <input id="usernameInput" type="text" placeholder="Login Username" name="usernameInput">
+            <input id="passwordInput" type="password" placeholder="Login Password" name="passwordInput">
             <br>
             <!-- <p></p> -->
-            <button id = "loginButton" name="loginButton">Login</button>
+            <button id="loginButton" name="loginButton">Login</button>
+            </form>
+            <form method="post" action="database/register.php">
             <p style="margin-bottom: 0px; color: white;">Dont have Account? Register Now</p>
             <hr style="width: 80%;">
-            <button id= "registerButton" name="registerButton">Register</button>
-            <p id = "inputOutput"></p>
-        </div>
-    </form>
-    
-    <script type="module" src="Logic/login.js"></script>
+            <input id="registerUsernameInput" type="text" placeholder="Register Username" name="registerUsernameInput">
+            <input id="registePasswordInput" type="password" placeholder="Register Password" name="registerPasswordInput"><br>
+            <button id="registerButton" name="registerButton">Register</button>
+            </form>
+            <p id="inputOutput"></p>
+    </div>
+
+    <script>
+        var username;
+
+        // Login
+        var inputUsername = document.querySelector("#usernameInput");
+        var inputPassword = document.querySelector("#passwordInput");
+
+        var registerInputUsername = document.querySelector("#registerUsernameInput");
+        var registerInputPassword = document.querySelector("#registePasswordInput");
+
+        var outputInput = document.querySelector("#inputOutput");
+
+        var loginButton = document.querySelector("#loginButton");
+        if (loginButton) loginButton.addEventListener("click", loginClickHandler, false);
+        var registerButton = document.querySelector("#registerButton");
+        if (registerButton) registerButton.addEventListener("click", registerClickHandler, false);
+
+        window.onload = function () {
+            if (window.localStorage.getItem("StatusLogin") == "Not Found") {
+                window.localStorage.removeItem("StatusLogin");
+                alert("Need Register First");
+            }
+        };
+
+        function loginClickHandler() {
+            console.log("Login");
+            login();
+        }
+        function login() {
+            if (inputUsername.value == "" || inputPassword.value == "") {
+                outputInput.innerHTML = "Fill the Field username or password";
+
+                return;
+            }
+
+            window.localStorage.setItem("username", inputUsername.value);
+        }
+
+        function registerClickHandler() {
+            register();
+        }
+        function register() {
+            if (registerInputUsername.value == "" || registerInputPassword.value == "") {
+                outputInput.innerHTML = "Fill the Field username or password";
+
+                return;
+            }
+
+            window.localStorage.setItem("username", registerInputUsername.value);
+        }
+        
+    </script>
 </body>
+
 </html>

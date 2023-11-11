@@ -1,3 +1,7 @@
+window.onload = function(){
+    console.log(window.localStorage.getItem("username"));
+};
+
 document.addEventListener("DOMContentLoaded", function() {
     let playButton = document.getElementsByClassName("mainMenuPlayButton");
     if (playButton[0]) playButton[0].addEventListener("click", clickHandler, false);
@@ -8,5 +12,6 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location = 'ingame.html';
     } 
 });
+
 
 

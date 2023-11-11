@@ -5,32 +5,44 @@
     $dbname = "dbalienattack";
 
     //Variabel For Login users
-    $loginUsername = $_POST["username"];
-    $loginPassword = $_POST["password"];
+    $loginUsername = filter_input(INPUT_POST, 'usernameInput');
+    $loginPassword = filter_input(INPUT_POST, 'passwordInput');
 
     $con = new mysqli($servername, $username, $password,$dbname);
-    
-    if ($con -> connect_error) {
-        die("Nothing Data In Here " . $con -> connect_error);
+
+    if (mysqli_connect_error()){
+        die("Not Connected");
     }
-
-    $sql = "SELECT password, ID FROM users where username = '$loginUsername'";
-
-    $result = $con->query($sql);
     
-    if ($result->num_rows > 0) {
-      // output data of each row
-      while($row = $result->fetch_assoc()) {
-          if ($row["password"] == $loginPassword) {
-              # code...
-              echo $row["ID"];
-          }
-          else{
-              echo "Login Failed";
-          }
-      }
-    } else {
-      echo $loginUsername . " Doesn't Exists";
+    if (!empty($loginUsername)){
+        if (!empty($loginPassword)){
+            $sql = "SELECT * FROM users WHERE username = '$loginUsername'";
+            $result = $con->query($sql);
+            if ($result->num_rows > 0){
+                while ($row = $result->fetch_assoc()){
+                    if ($row["password"] == $loginPassword){
+                        echo '<script>
+                        window.localStorage.setItem("ID", '.$row["ID"].');
+                        window.localStorage.setItem("StatusLogin", "Success"); 
+                        window.location = "../mainmenu.html";
+                        </script>';
+                    }else{
+                        echo "not login";
+                    }
+                }
+            }else{
+                echo '<script>
+                 window.localStorage.setItem("StatusLogin", "Not Found"); 
+                 window.location = "../login.html";
+                </script>';
+            }
+        }else{
+            echo "Password Should Not Be Empty";
+            die();
+        }
+    }else{
+        echo "Username Should Not Be Empty";
+        die();
     }
 
     $con->close();

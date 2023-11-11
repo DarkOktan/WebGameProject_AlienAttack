@@ -1,7 +1,12 @@
 var username;
 
+// Login
 var inputUsername = document.querySelector("#usernameInput");
 var inputPassword = document.querySelector("#passwordInput");
+
+var registerInputUsername = document.querySelector("#registerUsernameInput");
+var registerInputPassword = document.querySelector("#registePasswordInput");
+
 var outputInput = document.querySelector("#inputOutput");
 
 var loginButton = document.querySelector("#loginButton");
@@ -11,6 +16,7 @@ if (registerButton) registerButton.addEventListener("click", registerClickHandle
 
 function loginClickHandler()
 {
+    console.log("Login");
     login();
 }
 function login()
@@ -23,22 +29,21 @@ function login()
     }
 
     window.localStorage.setItem("username", inputUsername.value);
-    console.log(inputUsername.value);
-
-    window.location = 'mainmenu.html';
 }
 
 function registerClickHandler(){
+    console.log("register");
     register();
 }
 function register(){
-    if (inputUsername.value == "" || inputPassword.value == "")
+    if (registerInputUsername.value == "" || registerInputPassword.value == "")
     {
         outputInput.innerHTML = "Fill the Field username or password";
 
         return;
     }
 
-    console.log("register");
+    window.localStorage.setItem("username", registerInputUsername.value);
+    console.log("Register");
 }
 

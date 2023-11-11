@@ -128,12 +128,50 @@ function playGame() {
 function endGame() {
     if (gameWon) {
         // Save Score
+        var record  = {
+            'ID': window.localStorage.getItem("ID"),
+            'username': window.localStorage.getItem("username"),
+            'timeSpend': currentStopwatch,
+            'tryShoot': 8 - shotsRemaining,
+        }
 
-        window.location = 'win_gameOver.html';
+        var xhr = new XMLHttpRequest();
+        var url = "./database/InsertScore.php";
+
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    // Handle the server response if needed
+                    console.log(record);
+                    console.log(xhr.responseText);
+                    // location.reload();
+                } else {
+                    // Handle errors if any
+                    console.log(`[${xhr.status}] ${xhr.statusText}`);
+                }
+            }
+        };
+
+        xhr.onerror = function (error) {
+            console.error('Request failed', error);
+        };
+
+        // Convert the data to URL-encoded format before sending
+        var formData = new URLSearchParams();
+        for (var key in record) {
+            formData.append(key, record[key]);
+        }
+
+        xhr.send(formData);
+
+        window.location = 'win_gameOver.php';
         
-        output.innerHTML
-            = "Hit! You saved the earth!" + "<br>"
-            + "It only took you " + shotsMade + " shots.";
+        // output.innerHTML
+        //     = "Hit! You saved the earth!" + "<br>"
+        //     + "It only took you " + shotsMade + " shots.";
     }
     else {
         window.location = 'lose_gameOver.html';
